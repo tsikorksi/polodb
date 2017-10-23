@@ -1,9 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
 <body>
-<p>choose existing horse of enter a new one</p>
-<select>
-    <option value = "dora">Dora</option>
-</select>
+<p>Enter name of pony</p>
+<form method="post"  action = "/">
+    {{ form.hidden_tag() }}
+    <div class = "form_group">
+        {{ form.pony.label}}
+        {% if form.pony.errors %}
+            {% for error in form.pony.errors %}
+            <p class="error-message">{{error}}</p>
+            {% endfor %}
+        {% endif %}
+        {{form.pony}}
+    </div>
+    {{form.submit(class= "btn-primary")}}
+</form>
 </body>
 {% endblock %}

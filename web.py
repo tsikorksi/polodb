@@ -1,13 +1,21 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from forms import InputForm
 app = Flask(__name__)
 app.secret_key = "development-key"
 
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["GET", "POST"])
 def hello():
-    form = InputForm
-    return render_template('entry_menu.html', form = form)
+    form = InputForm()
+    if request.method == "POST":
+        if form.validate() == False:
+            return render_template('entry_menu.html', form=form), 412
+        else:
+            ponyName = request.form[1]
+            return "yay"
+    elif request.method == "GET":
+        return render_template('entry_menu.html', form=form), 404
+    return render_template('entry_menu.html', form=form)
 
 
 @app.errorhandler(404)
