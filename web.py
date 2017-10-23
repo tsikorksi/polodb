@@ -8,10 +8,11 @@ app.secret_key = "development-key"
 def hello():
     form = InputForm()
     if request.method == "POST":
-        if form.validate() == False:
+        if form.validate() is False:
             return render_template('entry_menu.html', form=form), 412
         else:
-            ponyName = request.form[1]
+            pony_name = request.form["pony"]
+
             return "yay"
     elif request.method == "GET":
         return render_template('entry_menu.html', form=form), 404
