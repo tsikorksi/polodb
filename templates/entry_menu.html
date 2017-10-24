@@ -8,17 +8,10 @@
     Error
 </p>
 {%endif%}
-<form method="post"  action ="{{ url_for('hello') }}" id="venue">
+<form method="post"  action ="{{ url_for('hello') }}">
     <div class = "form_group">
         Venue:<br>
-        <span class="box">
-            <input type="text" name="venue" class="datatext" id="datatext" placeholder="Venue">
-            <select class="contentselect" id="contentselect" title="">
-                <option></option>
-                <option value="epsom">Epsom</option>
-                <option value="guards">Guards</option>
-            </select>
-        </span>
+        <input type="text" name="venue" placeholder="Venue">
         <br>
         Pony:<br>
         <input type="text" name="pony" placeholder="Pony name">

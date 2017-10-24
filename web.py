@@ -4,6 +4,7 @@ app = Flask(__name__)
 app.secret_key = "development-key"
 ponies = open("data"+"/ponies.txt", "a")
 venues = open("data"+"/venues.txt", "a")
+players = open("data"+"/players.txt", "a")
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -11,9 +12,13 @@ def hello():
     error = None
     # form = InputForm()
     if request.method == "POST":
-        pony_name = str(request.form["pony"])
+        pony_name = request.form["pony"]
         ponies.write(pony_name + '\n')
-        venue = request.form["venue"
+        venue = request.form["venue"]
+        venues.write(venue + '\n')
+        player = request.form["player"]
+        players.write(player + '\n')
+        players.write("test")
         return render_template('entry_menu.html'), 200
     elif request.method == "GET":
         return render_template('entry_menu.html', error=error), 404
