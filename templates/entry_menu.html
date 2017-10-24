@@ -3,12 +3,12 @@
 {% block body %}
 <body>
 <p>Enter name of pony</p>
-{% if error %}
+{% if error == True %}
 <p>
     Error
 </p>
 {%endif%}
-<form method="post"  action ="{{ url_for('hello') }}">
+<form action ="{{url_for('hello')}}" method="POST" >
     <div class = "form_group">
         Venue:<br>
         <input type="text" name="venue" placeholder="Venue">
