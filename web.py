@@ -2,21 +2,22 @@ from flask import Flask, render_template, request
 from forms import InputForm
 app = Flask(__name__)
 app.secret_key = "development-key"
+ponies = open("data"+"/ponies.txt", "a")
+venues = open("data"+"/venues.txt", "a")
 
 
 @app.route("/", methods=["GET", "POST"])
 def hello():
-    form = InputForm()
+    error = None
+    # form = InputForm()
     if request.method == "POST":
-        if form.validate() is False:
-            return render_template('entry_menu.html', form=form), 412
-        else:
-            pony_name = request.form["pony"]
-
-            return "yay"
+        pony_name = str(request.form["pony"])
+        ponies.write(pony_name + '\n')
+        venue = request.form["venue"
+        return render_template('entry_menu.html'), 200
     elif request.method == "GET":
-        return render_template('entry_menu.html', form=form), 404
-    return render_template('entry_menu.html', form=form)
+        return render_template('entry_menu.html', error=error), 404
+    return render_template('entry_menu.html')
 
 
 @app.errorhandler(404)

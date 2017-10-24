@@ -3,18 +3,31 @@
 {% block body %}
 <body>
 <p>Enter name of pony</p>
-<form method="post"  action = "/">
-    {{ form.hidden_tag() }}
+{% if error %}
+<p>
+    Error
+</p>
+{%endif%}
+<form method="post"  action ="{{ url_for('hello') }}" id="venue">
     <div class = "form_group">
-        {{ form.pony.label}}
-        {% if form.pony.errors %}
-            {% for error in form.pony.errors %}
-            <p class="error-message">{{error}}</p>
-            {% endfor %}
-        {% endif %}
-        {{form.pony}}
+        Venue:<br>
+        <span class="box">
+            <input type="text" name="venue" class="datatext" id="datatext" placeholder="Venue">
+            <select class="contentselect" id="contentselect" title="">
+                <option></option>
+                <option value="epsom">Epsom</option>
+                <option value="guards">Guards</option>
+            </select>
+        </span>
+        <br>
+        Pony:<br>
+        <input type="text" name="pony" placeholder="Pony name">
+        <br>
+        Player:<br>
+        <input type="text" name="player" placeholder="Player Name">
+        <br>
+        <input type="submit" value="Submit">
     </div>
-    {{form.submit(class= "btn-primary")}}
 </form>
 </body>
 {% endblock %}
