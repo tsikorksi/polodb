@@ -10,19 +10,28 @@ def hello():
     :return:
     """
     if request.method == "POST":
-        ponies = open("data" + "/ponies.txt", "w")
-        venues = open("data" + "/venues.txt", "w")
-        players = open("data" + "/players.txt", "w")
-        venue = request.form["venue"]
-        venues.write(venue + '\n')
-        pony_name = request.form["pony"]
-        ponies.write(pony_name + '\n')
-        player = request.form["player"]
-        players.write(player + '\n')
-        return render_template('entry_menu.html'), 200
+        entry_data = []
+        coredb = open("data"+"/coredb.txt", "a")
+        entry_data.append(request.form["venue"])
+        entry_data.append(".")
+        entry_data.append(request.form["pony"])
+        entry_data.append(".")
+        entry_data.append(request.form["player"])
+        entry_data.append(".")
+        entry_data.append(request.form["result"])
+        entry_data.append(".")
+        entry_data.append(request.form["conditions"])
+        input_data = ''.join(entry_data)
+        valid = validate(input_data)
+        error = valid
+        if valid is False:
+            pass
+        else:
+            coredb.write(input_data + '\n')
+        return render_template('entry_menu.html', error=error), 200
     elif request.method == "GET":
-        return render_template('entry_menu.html', error=True), 400
-    return render_template('entry_menu.html', error=False)
+        return render_template('entry_menu.html')
+    return render_template('entry_menu.html', error=True)
 
 
 @app.errorhandler(404)
@@ -33,6 +42,24 @@ def page_not_found(error):
     :return:
     """
     return render_template('page_not_found.html'), 404
+
+
+@app.route("/search")
+def search():
+    pass
+
+
+@app.route("/stats")
+def stats():
+    pass
+
+
+def validate(data_set):
+    valid = True
+    for i in range(0, len(data_set)):
+        if data_set[i] == "." and data_set[i-1] == ".":
+            valid = False
+    return valid
 
 
 if __name__ == "__main__":

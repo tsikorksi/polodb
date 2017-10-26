@@ -2,12 +2,10 @@
 {% extends "layout.html" %}
 {% block body %}
 <body>
-<p>Enter name of pony</p>
-{% if error == True %}
-<p>
-    Error
-</p>
-{%endif%}
+{% if error == False %}
+<p>Data entry Error, try again</p>
+{% endif %}
+<p>Enter chukka data</p>
 <form action ="{{url_for('hello')}}" method="POST" >
     <div class = "form_group">
         Venue:<br>
@@ -19,8 +17,27 @@
         Player:<br>
         <input type="text" name="player" placeholder="Player Name">
         <br>
-        <input type="submit" value="Submit">
+        <br>
+        Result for play er:<br>
+        Please indicate how many points the player scored this chukka
+        <br>
+        <input type="text" name="result" placeholder="Result">
+        <br>
+        Conditions:<br>
+        <select name="conditions" title="conditions">
+            <option value="0">Clear</option>
+            <option value="1">Rain</option>
+            <option value="2">Snow</option>
+            <option value="3">Hot</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Add new chukka">
     </div>
 </form>
+<br>
+<nav>
+    <a href="/stats">Statistical Analysis</a>
+</nav>
 </body>
 {% endblock %}
