@@ -54,6 +54,11 @@ def stats():
     return render_template('page_not_found.html'), 404
 
 
+@app.route("/robots.txt")
+def robots():
+    return render_template('robots.txt')
+
+
 def validate(data_set):
     valid = True
     for i in range(0, len(data_set)):
