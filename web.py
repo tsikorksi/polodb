@@ -46,12 +46,12 @@ def page_not_found(error):
 
 @app.route("/search")
 def search():
-    pass
+    return render_template('page_not_found.html'), 404
 
 
 @app.route("/stats")
 def stats():
-    pass
+    return render_template('page_not_found.html'), 404
 
 
 def validate(data_set):
