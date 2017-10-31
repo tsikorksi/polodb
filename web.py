@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+import forms as forms
 app = Flask(__name__)
 app.secret_key = "development-key"
 
@@ -7,6 +8,10 @@ app.secret_key = "development-key"
 def hello():
     """
     Basic web service for data entry
+    all data is added to coredb.txt (i know)
+    there is no db library because this has to be
+    'computationally complex' cuz fuck not reinventing the wheel
+    this will not scale lol
     :return:
     """
     if request.method == "POST":
@@ -29,6 +34,8 @@ def hello():
             coredb.write(input_data + '\n')
         return render_template('entry_menu.html', error=error), 200
     elif request.method == "GET":
+        with open("data"+"/visitors.txt", "a") as file:
+            file.write(str(jsonify({'ip': request.environ["REMOTE_ADDR"]}))+"\n")
         return render_template('entry_menu.html')
     return render_template('entry_menu.html', error=True)
 
@@ -45,11 +52,18 @@ def page_not_found(error):
 
 @app.route("/search")
 def search():
+    """
+    probably wont be used
+    :return:
+    """
     return render_template('page_not_found.html'), 404
 
 
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
+    if request.method == "POST":
+        x = forms.base()
+        print(x)
     return render_template('data_menu.html')
 
 
