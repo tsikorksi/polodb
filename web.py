@@ -11,6 +11,7 @@ def hello():
     """
     if request.method == "POST":
         entry_data = []
+        # data entry
         coredb = open("data"+"/coredb.txt", "a")
         entry_data.append(request.form["venue"])
         entry_data.append(".")
@@ -24,9 +25,7 @@ def hello():
         input_data = ''.join(entry_data)
         valid = validate(input_data)
         error = valid
-        if valid is False:
-            pass
-        else:
+        if valid:
             coredb.write(input_data + '\n')
         return render_template('entry_menu.html', error=error), 200
     elif request.method == "GET":
@@ -49,9 +48,9 @@ def search():
     return render_template('page_not_found.html'), 404
 
 
-@app.route("/stats")
+@app.route("/stats", methods=["POST", "GET"])
 def stats():
-    return render_template('page_not_found.html'), 404
+    return render_template('data_menu.html')
 
 
 @app.route("/robots.txt")
@@ -60,6 +59,11 @@ def robots():
 
 
 def validate(data_set):
+    """
+    data validation for input
+    :param data_set:
+    :return:
+    """
     valid = True
     for i in range(0, len(data_set)):
         if data_set[i] == "." and data_set[i-1] == ".":
