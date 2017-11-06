@@ -1,4 +1,9 @@
-head{
-    font-size: 250%;
+h2{
+    font-size: 300%;
     text-align: center;
+    background-color: #96C8A2;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f2f1
 }

@@ -35,7 +35,7 @@ def hello():
         return render_template('entry_menu.html', error=error), 200
     elif request.method == "GET":
         with open("data"+"/visitors.txt", "a") as file:
-            file.write(str(jsonify({'ip': request.environ["REMOTE_ADDR"]}))+"\n")
+            file.write('ip: ' + request.environ['REMOTE_ADDR'] + " " + str(jsonify({'ip': request.remote_addr})) + "\n")
         return render_template('entry_menu.html')
     return render_template('entry_menu.html', error=True)
 
