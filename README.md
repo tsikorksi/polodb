@@ -1,2 +1,2 @@
-# polodb
-Polo databse and comparison script
+# Polodb
+Polo databse and comparison script, written with flask 
