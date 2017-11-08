@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import forms as forms
+import Encrypt as encrypt
+import random
 app = Flask(__name__)
 app.secret_key = "development-key"
 
@@ -31,6 +33,7 @@ def hello():
         valid = validate(input_data)
         error = valid
         if valid:
+            input_data = encrypt.shift_encode(input_data, 5)
             coredb.write(input_data + '\n')
         return render_template('entry_menu.html', error=error), 200
     elif request.method == "GET":

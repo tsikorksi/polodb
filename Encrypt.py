@@ -1,7 +1,3 @@
-test = ["a.a.a.a.a.", "b.b.b.b.b"]
-final_array = []
-
-
 def formatting(arr):
     """
     :param arr:
@@ -10,20 +6,6 @@ def formatting(arr):
     for i in range(0, len(arr)):
         print(arr[i], end='')
     print("\n")
-
-
-def split():
-    for i in range(0,len(test)):
-        temp = test[i]
-        return_array = []
-
-        for j in range(0, len(temp)):
-            if temp[j] == ".":
-                pass
-            else:
-                return_array.append(temp[j])
-        final_array.append(return_array)
-    formatting(final_array)
 
 
 def shift_encode(message, shift):
@@ -61,7 +43,4 @@ def shift_decode(message, shift):
         message_int -= shift
         x.append(chr(message_int))
     formatting(x)
-
-split()
-
 
