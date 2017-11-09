@@ -29,6 +29,7 @@ def hello():
             for j in range(0, len(entry_data[i])):
                 temp.append(entry_data[i][j])
             temp.append('.')
+        temp.append('.')
         input_data = ''.join(temp)
         valid = validate(input_data)
         error = valid

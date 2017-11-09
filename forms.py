@@ -1,26 +1,25 @@
 """
 This file will take and compare the data in coredb.txt
 """
-# "aa.aa.aa.aa.aa", "bb.bb.bb.bb.bb"
-import encrypt as encrypt
+import encrypt
 
 
-def split(input_array):
+def split(input_str):
+    """
+    this function is haunted
+    this function has been exorcised, carry on citizen
+    :return:
+    """
     final_array = []
-    for i in range(0, len(input_array)):
-        temp = input_array[i]
-        return_array = []
-        # print(temp)
-        for j in range(0, len(temp)):
-            if temp[j] == ".":
-                print(return_array)
-                final_array.append(return_array)
-                del return_array[:]
-            else:
-                return_array.append(temp[j])
-
-    # formatting(final_array)
-    # print(final_array)
+    mid_array = []
+    check = len(input_str)
+    for i in range(0, len(input_str)):
+        if input_str[i] == ".":
+            final_array.append(mid_array)
+            mid_array = []
+        else:
+            mid_array.append(input_str[i])
+    print(final_array)
     return final_array
 
 
@@ -42,6 +41,3 @@ def data_encode():
         for i in range(0, len(data)):
             data.append(encrypt.shift_decode(data[i], 5))
         return data
-
-
-split(["aa.aa.aa.aa.aa", "bb.bb.bb.bb.bb"])
