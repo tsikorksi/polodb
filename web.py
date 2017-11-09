@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import forms as forms
-import Encrypt as encrypt
-import random
+import encrypt
 app = Flask(__name__)
 app.secret_key = "development-key"
 
@@ -10,7 +9,7 @@ app.secret_key = "development-key"
 def hello():
     """
     Basic web service for data entry
-    all data is added to coredb.txt (i know)
+    all data is added to coredb.txt
     there is no db library because this has to be
     'computationally complex' cuz fuck not reinventing the wheel
     this will not scale lol
@@ -18,22 +17,22 @@ def hello():
     """
     if request.method == "POST":
         entry_data = []
+        temp = []
         # data entry
         coredb = open("data"+"/coredb.txt", "a")
-        entry_data.append(request.form["venue"])
-        entry_data.append(".")
-        entry_data.append(request.form["pony"])
-        entry_data.append(".")
-        entry_data.append(request.form["player"])
-        entry_data.append(".")
-        entry_data.append(request.form["result"])
-        entry_data.append(".")
-        entry_data.append(request.form["conditions"])
-        input_data = ''.join(entry_data)
+        entry_data.append(encrypt.shift_encode(request.form["venue"], 5))
+        entry_data.append(encrypt.shift_encode(request.form["pony"], 5))
+        entry_data.append(encrypt.shift_encode(request.form["player"], 5))
+        entry_data.append(encrypt.shift_encode(request.form["result"], 5))
+        entry_data.append(encrypt.shift_encode(request.form["conditions"], 5))
+        for i in range(0, len(entry_data)):
+            for j in range(0, len(entry_data[i])):
+                temp.append(entry_data[i][j])
+            temp.append('.')
+        input_data = ''.join(temp)
         valid = validate(input_data)
         error = valid
         if valid:
-            input_data = encrypt.shift_encode(input_data, 5)
             coredb.write(input_data + '\n')
         return render_template('entry_menu.html', error=error), 200
     elif request.method == "GET":
@@ -65,8 +64,7 @@ def search():
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
     if request.method == "POST":
-        x = forms.base()
-        print(x)
+        pass
     return render_template('data_menu.html')
 
 

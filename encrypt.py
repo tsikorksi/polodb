@@ -24,7 +24,8 @@ def shift_encode(message, shift):
         else:
             message_int += shift
         x.append(chr(message_int))
-    formatting(x)
+    return x
+    # formatting(x)
 
 
 def shift_decode(message, shift):
@@ -42,5 +43,6 @@ def shift_decode(message, shift):
             message_int += 26
         message_int -= shift
         x.append(chr(message_int))
-    formatting(x)
+    return x
+    # formatting(x)
 
