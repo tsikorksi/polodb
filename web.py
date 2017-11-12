@@ -29,8 +29,9 @@ def hello():
             for j in range(0, len(entry_data[i])):
                 temp.append(entry_data[i][j])
             temp.append('.')
-        temp.append('.')
+        # temp.append('.')
         input_data = ''.join(temp)
+        # print(input_data)
         valid = validate(input_data)
         error = valid
         if valid:
@@ -80,18 +81,12 @@ def validate(data_set):
     :param data_set:
     :return:
     """
-    count = 0
     valid = True
     # checks for missing data
     for i in range(0, len(data_set)):
         if data_set[i] == "." and data_set[i-1] == ".":
             valid = False
     # check that result is an int
-    for i in range(0, len(data_set)):
-        if data_set[i] == '.':
-            count += 1
-        if data_set[count] != type(int):
-            valid = False
     return valid
 
 

@@ -10,9 +10,9 @@ def formatting(arr):
 
 def shift_encode(message, shift):
     """
-    :param message:
-    :param shift:
-    :return:
+    :param message: str
+    :param shift: int
+    :return x: list
     """
     x = []
     if shift >= 26:

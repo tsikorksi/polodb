@@ -18,7 +18,6 @@ def split(input_str):
             mid_str = ''
         else:
             mid_str += input_str[i]
-    print(final_array)
     return final_array
 
 
