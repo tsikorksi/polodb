@@ -20,9 +20,9 @@ def hello():
         temp = []
         # data entry
         coredb = open("data"+"/coredb.txt", "a")
+        entry_data.append(encrypt.shift_encode(request.form["player"], 5))
         entry_data.append(encrypt.shift_encode(request.form["venue"], 5))
         entry_data.append(encrypt.shift_encode(request.form["pony"], 5))
-        entry_data.append(encrypt.shift_encode(request.form["player"], 5))
         entry_data.append(encrypt.shift_encode(request.form["result"], 5))
         entry_data.append(encrypt.shift_encode(request.form["conditions"], 5))
         for i in range(0, len(entry_data)):
