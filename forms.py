@@ -11,14 +11,13 @@ def split(input_str):
     :return:
     """
     final_array = []
-    mid_array = []
-    check = len(input_str)
+    mid_str = ''
     for i in range(0, len(input_str)):
         if input_str[i] == ".":
-            final_array.append(mid_array)
-            mid_array = []
+            final_array.append(mid_str)
+            mid_str = ''
         else:
-            mid_array.append(input_str[i])
+            mid_str += input_str[i]
     print(final_array)
     return final_array
 
