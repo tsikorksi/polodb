@@ -46,4 +46,20 @@ def data_encode():
 
 
 def main_stats():
-    pass
+    """
+    needs work, doesnt work yet
+    :return:
+    """
+    input_data = []
+    mid_data = []
+    with open("data" + "/coredb.txt") as f:
+        data = f.read().splitlines()
+        print(data)
+    for i in range(0, len(data)):
+        mid_data.append(split(data[i]))
+        for j in range(0, len(mid_data[i])):
+            input_data.append(encrypt.shift_decode(mid_data[i][j], 5))
+        print(mid_data)
+    print(input_data)
+
+main_stats()
