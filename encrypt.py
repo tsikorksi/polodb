@@ -39,10 +39,7 @@ def shift_decode(message, shift):
         shift %= 26
     for i in range(0, len(message)):
         message_int = ord(message[i])
-        if message_int - shift < 97:
-            message_int += 26
         message_int -= shift
         x.append(chr(message_int))
     return x
     # formatting(x)
-
