@@ -66,8 +66,11 @@ def search():
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
     if request.method == "POST":
-        pass
-    return render_template('data_menu.html')
+        player_name = request.form['player_name']
+        mean, median, max_val, min_val, dev = forms.player_stats(player_name)
+        return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name]
+                               , entered=True)
+    return render_template('data_menu.html', entered=False)
 
 
 @app.route("/robots.txt")

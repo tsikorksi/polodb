@@ -71,7 +71,7 @@ def maths(values, mean):
         std_values.append(values[i] ** 2)
     half_way = (sum(std_values)) / (len(values))
     std_dev = math.sqrt((half_way - (mean ** 2)))
-    print(mean, median, max_val, min_val, std_dev)
+    # print(mean, median, max_val, min_val, std_dev)
     return median, max_val, min_val, std_dev
 
 
@@ -93,7 +93,7 @@ def player_stats(player):
     mean = sum_val/count
     # sort
     bubble_sort(values)
-    print(values)
+    # print(values)
     median, max_val, min_val, std_dev = maths(values, mean)
     return mean, median, max_val, min_val, std_dev
 

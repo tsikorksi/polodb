@@ -5,4 +5,23 @@
         <input type="text" name="player_name" placeholder="Player Name">
         <br>
     </form>
+    {% if entered == True %}
+    <div class = "data_group">
+    <h3 id="top">
+        {% for item in template %}item.player_name{% endfor %}
+    </h3>
+    <p>
+        Mean score =  {% for item in template %}item.mean{% endfor %}
+        <br>
+        Median score =  {% for item in template %}item.median{% endfor %}
+        <br>
+        Highest score =  {% for item in template %}item.max_val{% endfor %}
+        <br>
+        Lowest score =  {% for item in template %}item.min_val{% endfor %}
+        <br>
+        Standard deviation of score =  {% for item in template %}item.dev{% endfor %}
+        <br>
+    </p>
+    </div>
+    {% endif %}
 {% endblock %}
