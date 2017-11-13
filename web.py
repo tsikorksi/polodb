@@ -86,7 +86,6 @@ def validate(data_set):
     for i in range(0, len(data_set)):
         if data_set[i] == "." and data_set[i-1] == ".":
             valid = False
-    # check that result is an int
     return valid
 
 

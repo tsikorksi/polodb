@@ -34,8 +34,16 @@ def data_decode():
 
 
 def data_encode():
+    """
+    probably wont be needed
+    :return:
+    """
     with open("data" + "/coredb.txt") as f:
         data = f.read().splitlines()
         for i in range(0, len(data)):
             data.append(encrypt.shift_decode(data[i], 5))
         return data
+
+
+def main_stats():
+    pass
