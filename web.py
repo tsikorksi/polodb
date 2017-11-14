@@ -1,6 +1,10 @@
-from flask import Flask, render_template, request, jsonify, make_response
+from flask import Flask, render_template, request, jsonify
 import forms
 import encrypt
+template = None
+template2 = None
+entered = None
+entered2 = None
 app = Flask(__name__)
 app.secret_key = "development-key"
 # TODO:secondary data comparison, css, unit tests, docs
