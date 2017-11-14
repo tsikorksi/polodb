@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 {% block body %}
-    {% if entered == False %}
-        <p>Search player database and get stats</p>
+
+        <p>Search player database</p>
         <form action="{{ url_for('stats') }}" method="POST">
-            <input type="text" name="player_name" placeholder="Player Name">
+            <input type="text" name="player_name" placeholder="Player Name" pattern="[a-z]{0,}">
             <br>
         </form>
-    {% else %}
+        {% if entered == True %}
         <div class = "data_group">
             <h3 id="top">
                 {{ template[5] }}

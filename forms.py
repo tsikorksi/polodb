@@ -44,7 +44,7 @@ def data_decode():
         data = f.read().splitlines()
         # print(data)
         for i in range(0, len(data)):
-            output_data.append(split(encrypt.shift_decode(data[i], 5)))
+            output_data.append(split(encrypt.shift_decode(data[i].lower(), 5)))
     # print(output_data)
     return output_data
 
@@ -90,6 +90,8 @@ def player_stats(player):
             count += 1
             values.append(int(input_array[i][3]))
             sum_val += int(input_array[i][3])
+    if count == 0:
+        pass
     mean = sum_val/count
     # sort
     bubble_sort(values)
