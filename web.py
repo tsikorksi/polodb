@@ -19,7 +19,7 @@ def hello():
     if request.method == "POST":
         entry_data = []
         temp = []
-        # data entry
+        # data entry, encrypted with whift of 5, chosen by fair dice roll, guaranteed random
         coredb = open("data"+"/coredb.txt", "a")
         entry_data.append(encrypt.shift_encode(request.form["player"], 5))
         entry_data.append(encrypt.shift_encode(request.form["venue"], 5))
