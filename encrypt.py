@@ -19,10 +19,10 @@ def shift_encode(message, shift):
         shift %= 26
     for i in range(0, len(message)):
         message_int = ord(message[i])
-        """if message_int + shift > 122:
+        if message_int + shift > 122:
             message_int = message_int + shift - 26
         else:
-            message_int += shift"""
+            message_int += shift
         x.append(chr(message_int))
     return x
     # formatting(x)

@@ -1,41 +1,41 @@
 <!-- matchid.chukka_num.venue.season_state.conditions.chukka_max.pony.player.result -->
 {% extends "layout.html" %}
 {% block body %}
-<body>
-{% if error == False %}
-<p>Data entry Error, try again</p>
-{% endif %}
-<p>Enter chukka data:</p>
-<form action ="{{url_for('hello')}}" method="POST" >
-    <div class = "form_group">
-        Venue:<br>
-        <input type="text" name="venue" placeholder="Venue">
-        <br>
-        Pony:<br>
-        <input type="text" name="pony" placeholder="Pony name">
-        <br>
-        Player:<br>
-        <input type="text" name="player" placeholder="Player Name">
-        <br>
-        <br>
-        Result for player:<br>
-        Please indicate how many points were scored by this players team this chukka
-        <br>
-        <input type="text" name="result" placeholder="Result" pattern="[0-9]{0,}" title="Whole number">
-        <br>
-        Conditions:<br>
-        <select name="conditions" title="conditions">
-            <option value="0">Clear</option>
-            <option value="1">Rain</option>
-            <option value="2">Snow</option>
-            <option value="3">Hot</option>
-        </select>
-        <br>
-        <br>
-        <input type="submit" value="Add new chukka">
-    </div>
-</form>
-<br>
-<a href="/stats">Statistical Analysis</a>
-</body>
+    <body>
+    {% if error == False %}
+        <p>Data entry Error, try again</p>
+    {% endif %}
+    <p>Enter chukka data:</p>
+    <form action ="{{url_for('hello')}}" method="POST" >
+        <div class = "form_group">
+            Venue:<br>
+            <input type="text" name="venue" placeholder="Venue">
+            <br>
+            Pony:<br>
+            <input type="text" name="pony" placeholder="Pony name">
+            <br>
+            Player:<br>
+            <input type="text" name="player" placeholder="Player Name">
+            <br>
+            <br>
+            Result for player:<br>
+            Please indicate how many points were scored by this players team this chukka
+            <br>
+            <input type="text" name="result" placeholder="Result" pattern="[0-9]{0,}" title="Whole number">
+            <br>
+            Conditions:<br>
+            <select name="conditions" title="conditions">
+                <option value="0">Clear</option>
+                <option value="1">Rain</option>
+                <option value="2">Snow</option>
+                <option value="3">Hot</option>
+            </select>
+            <br>
+            <br>
+            <input type="submit" value="Add new chukka">
+        </div>
+    </form>
+    <br>
+    <a href="/stats">Statistical Analysis</a>
+    </body>
 {% endblock %}
