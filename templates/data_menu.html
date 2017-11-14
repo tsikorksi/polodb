@@ -67,20 +67,5 @@
                 <br>
             </p>
         </div>
-        <div class  = 'search_group'>
-            <p>Search for player stats comparing:</p>
-            <form action="{{ url_for('stats') }}" method="POST">
-                <select name="options" title ='search_query_type'>
-                    <option value="pony">Pony</option>
-                    <option value="venue">Venue</option>
-                    <option value="conditions">Conditions</option>
-                </select>
-                <br>
-                <br>
-                <input type="text" name="search_query" placeholder="Search">
-                <br>
-                <input type="submit" value="Search">
-            </form>
-        </div>
     {% endif %}
 {% endblock %}

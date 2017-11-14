@@ -3,7 +3,7 @@ import forms
 import encrypt
 app = Flask(__name__)
 app.secret_key = "development-key"
-# TODO:comparison between players, secondary data comparison, css, unit tests
+# TODO:secondary data comparison, css, unit tests, docs
 
 
 @app.route("/", methods=["GET", "POST"])
