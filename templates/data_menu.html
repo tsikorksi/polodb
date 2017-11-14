@@ -1,12 +1,21 @@
 {% extends 'layout.html' %}
 {% block body %}
-
-        <p>Search player database</p>
+    <p>Search player database</p>
+    <div class="entry">
         <form action="{{ url_for('stats') }}" method="POST">
             <input type="text" name="player_name" placeholder="Player Name" pattern="[a-z]{0,}">
+            <input type="submit" value="Search">
             <br>
         </form>
-        {% if entered == True %}
+     </div>
+    {% if entered == True %}
+        <div class="entry_two">
+            <form action="{{ url_for('compare') }}" method="POST">
+                <p>Compare</p>
+                <input type="text" name="player_name_2" placeholder="Player Name" pattern="[a-z]{0,}">
+                <input type="submit" value="Compare">
+            </form>
+        </div>
         <div class = "data_group">
             <h3 id="top">
                 {{ template[5] }}
@@ -21,6 +30,49 @@
                 Lowest score =  {{ template[3] }}
                 <br>
                 Standard deviation of score =  {{ template[4] }}
+                <br>
+            </p>
+        </div>
+        <div class  = 'search_group'>
+            <p>Search for player stats comparing:</p>
+            <form action="{{ url_for('stats') }}" method="POST">
+                <select name="options" title ='search_query_type'>
+                    <option value="pony">Pony</option>
+                    <option value="venue">Venue</option>
+                    <option value="conditions">Conditions</option>
+                </select>
+                <br>
+                <br>
+                <input type="text" name="search_query" placeholder="Search">
+                <br>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    {% endif %}
+
+
+    {% if entered2 == True %}
+        <div class="entry_two">
+            <form action="{{ url_for('stats') }}" method="POST">
+                <p>Compare</p>
+                <input type="text" name="player_name_2" placeholder="Player Name" pattern="[a-z]{0,}">
+                <input type="submit" value="Compare">
+            </form>
+        </div>
+        <div class = "data_group">
+            <h3 id="top">
+                {{ template2[5] }}
+            </h3>
+            <p>
+                Mean score =  {{ template2[0] }}
+                <br>
+                Median score = {{ template2[1] }}
+                <br>
+                Highest score =  {{ template2[2] }}
+                <br>
+                Lowest score =  {{ template2[3] }}
+                <br>
+                Standard deviation of score =  {{ template2[4] }}
                 <br>
             </p>
         </div>

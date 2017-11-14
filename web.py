@@ -55,23 +55,26 @@ def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
 
-@app.route("/search")
-def search():
-    """
-    probably wont be used
-    :return:
-    """
-    return render_template('page_not_found.html'), 404
-
-
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
     if request.method == "POST":
         player_name = request.form['player_name']
-        mean, median, max_val, min_val, dev = forms.player_stats(player_name)
-        return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name]
-                               , entered=True)
+        mean, median, max_val, min_val, dev, error = forms.player_stats(player_name)
+        # other_name = request.form['player_name_2']
+        # mean_2, median_2, max_val_2, min_val_2, dev_2, error_2 = forms.player_stats(other_name)
+        if error:
+            return render_template('page_not_found.html'), 404
+        else:
+            return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
+                                   entered=True)
+            # , template2=[mean_2, median_2, max_val_2, min_val_2, dev_2, error_2],
+            #                      , entered2=True)
     return render_template('data_menu.html', entered=False)
+
+
+@app.route("/compare", methods=["POST", "GET"])
+def compare():
+    pass
 
 
 @app.route("/robots.txt")

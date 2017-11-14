@@ -10,3 +10,8 @@ body{
 .data_group h3{
     text-transform: capitalize;
 }
+.entry_two{
+    position: relative;
+    left: 600px;
+    top: -75px;
+}

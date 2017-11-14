@@ -30,7 +30,7 @@ def random_write():
 
 
 def random_gen():
-    players = ["tad", "eric", "john", "simon"]
+    players = ["tad", "eric", "john", "simon", 'erica', 'samantha']
     venues = ["epsom", "guards"]
     ponies = ["dora", "simpatico", "elana", "horace", "dagny", "heel", "india"]
     arr = [players[random.randint(0, 3)], venues[random.randint(0, 1)], ponies[random.randint(0, 6)],

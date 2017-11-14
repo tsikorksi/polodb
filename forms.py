@@ -27,7 +27,7 @@ def split(input_str):
     final_array = []
     mid_str = ''
     for i in range(0, len(input_str)):
-        if input_str[i] == "." or input_str [i] == ')':
+        if input_str[i] == "." or input_str[i] == ')':
             final_array.append(mid_str)
             mid_str = ''
         else:
@@ -81,6 +81,7 @@ def player_stats(player):
     :param: str
     :return:
     """
+    error = False
     values = []
     sum_val, count = 0, 0
     input_array = data_decode()
@@ -90,11 +91,14 @@ def player_stats(player):
             count += 1
             values.append(int(input_array[i][3]))
             sum_val += int(input_array[i][3])
-    if count == 0:
-        pass
-    mean = sum_val/count
+    try:
+        mean = sum_val/count
+    except ZeroDivisionError:
+        error = True
+        mean, median, max_val, min_val, std_dev = 0, 0, 0, 0, 0
+        return mean, median, max_val, min_val, std_dev, error
     # sort
     bubble_sort(values)
     # print(values)
     median, max_val, min_val, std_dev = maths(values, mean)
-    return mean, median, max_val, min_val, std_dev
+    return mean, median, max_val, min_val, std_dev, error
