@@ -3,8 +3,8 @@ import forms
 import encrypt
 template = None
 template2 = None
-entered = None
-entered2 = None
+enter = None
+enter2 = None
 app = Flask(__name__)
 app.secret_key = "development-key"
 # TODO:secondary data comparison, css, unit tests, docs
@@ -56,6 +56,7 @@ def page_not_found(error):
     :param error:
     :return:
     """
+    print(error)
     return render_template('page_not_found.html'), 404
 
 
@@ -70,8 +71,8 @@ def stats():
             else:
                 global template
                 template = [mean, median, max_val, min_val, dev, player_name]
-                global entered
-                entered = True
+                global enter
+                enter = True
                 return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
                                        entered=True)
         else:
@@ -82,11 +83,9 @@ def stats():
             else:
                 global template2
                 template2 = [mean, median, max_val, min_val, dev, player_name2]
-                global entered2
-                entered2 = True
-                # resp = render_template('data_menu.html', template2=[mean, median, max_val, min_val, dev, player_name2]
-                #                     , entered2=True)
-        return render_template('data_menu.html', template=template, template2=template2, entered=entered, entered2=entered2)
+                global enter2
+                enter2 = True
+        return render_template('data_menu.html', template=template, template2=template2, enter=enter, enter2=enter2)
     else:
         return render_template('data_menu.html', entered=False, entered2=False)
 
