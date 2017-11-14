@@ -96,6 +96,3 @@ def player_stats(player):
     # print(values)
     median, max_val, min_val, std_dev = maths(values, mean)
     return mean, median, max_val, min_val, std_dev
-
-
-player_stats('a')
