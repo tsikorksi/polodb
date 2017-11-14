@@ -6,12 +6,12 @@ import encrypt
 
 
 def random_write():
-    count = int(input(""))
+    count = int(input("Data points?"))
     coredb = open("data" + "/coredb.txt", "a")
     for i in range(0, count):
         arr = random_gen()
         for j in range(0, len(arr)):
-            coredb.write(encrypt.shift_encode(arr[i],  5))
+            coredb.write(encrypt.shift_encode(arr[j],  5))
             coredb.write(".")
         coredb.write('\n')
 
