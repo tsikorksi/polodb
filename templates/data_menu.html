@@ -4,15 +4,15 @@
     <div class="entry">
         <form action="{{ url_for('stats') }}" method="POST">
             <input type="text" name="player_name" placeholder="Player Name" pattern="[a-z]{0,}">
-            <input type="submit" value="Search">
+            <input type="submit" value="Search" name="search">
             <br>
         </form>
-     </div>
+    </div>
     {% if entered == True %}
         <div class="entry_two">
-            <form action="{{ url_for('compare') }}" method="POST">
+            <form action="{{ url_for('stats') }}" method="POST">
                 <p>Compare</p>
-                <input type="text" name="player_name_2" placeholder="Player Name" pattern="[a-z]{0,}">
+                <input type="text" name="player_name2" placeholder="Player Name" pattern="[a-z]{0,}">
                 <input type="submit" value="Compare">
             </form>
         </div>
@@ -49,17 +49,8 @@
             </form>
         </div>
     {% endif %}
-
-
     {% if entered2 == True %}
-        <div class="entry_two">
-            <form action="{{ url_for('stats') }}" method="POST">
-                <p>Compare</p>
-                <input type="text" name="player_name_2" placeholder="Player Name" pattern="[a-z]{0,}">
-                <input type="submit" value="Compare">
-            </form>
-        </div>
-        <div class = "data_group">
+        <div class = "data_group2">
             <h3 id="top">
                 {{ template2[5] }}
             </h3>

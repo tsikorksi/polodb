@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 import forms
 import encrypt
 app = Flask(__name__)
@@ -58,18 +58,33 @@ def page_not_found(error):
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
     if request.method == "POST":
-        player_name = request.form['player_name']
-        mean, median, max_val, min_val, dev, error = forms.player_stats(player_name)
-        # other_name = request.form['player_name_2']
-        # mean_2, median_2, max_val_2, min_val_2, dev_2, error_2 = forms.player_stats(other_name)
-        if error:
-            return render_template('page_not_found.html'), 404
+        if 'search' in request.form:
+            player_name = request.form['player_name']
+            mean, median, max_val, min_val, dev, error = forms.player_stats(player_name)
+            if error:
+                return render_template('page_not_found.html'), 404
+            else:
+                global template
+                template = [mean, median, max_val, min_val, dev, player_name]
+                global entered
+                entered = True
+                return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
+                                       entered=True)
         else:
-            return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
-                                   entered=True)
-            # , template2=[mean_2, median_2, max_val_2, min_val_2, dev_2, error_2],
-            #                      , entered2=True)
-    return render_template('data_menu.html', entered=False)
+            player_name2 = request.form['player_name2']
+            mean, median, max_val, min_val, dev, error = forms.player_stats(player_name2)
+            if error:
+                return render_template('page_not_found.html'), 404
+            else:
+                global template2
+                template2 = [mean, median, max_val, min_val, dev, player_name2]
+                global entered2
+                entered2 = True
+                # resp = render_template('data_menu.html', template2=[mean, median, max_val, min_val, dev, player_name2]
+                #                     , entered2=True)
+        return render_template('data_menu.html', template=template, template2=template2, entered=entered, entered2=entered2)
+    else:
+        return render_template('data_menu.html', entered=False, entered2=False)
 
 
 @app.route("/compare", methods=["POST", "GET"])
