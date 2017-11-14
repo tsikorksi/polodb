@@ -2,7 +2,7 @@
 This file will take and compare the data in coredb.txt
 """
 import encrypt
-from math import sqrt
+import math
 
 
 def bubble_sort(arr):
@@ -70,7 +70,7 @@ def maths(values, mean):
     for i in range(0, len(values)):
         std_values.append(values[i] ** 2)
     half_way = (sum(std_values)) / (len(values))
-    std_dev = sqrt((half_way - (mean ** 2)))
+    std_dev = math.sqrt((half_way - (mean ** 2)))
     # print(mean, median, max_val, min_val, std_dev)
     return median, max_val, min_val, std_dev
 
