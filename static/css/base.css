@@ -1,15 +1,18 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 *{
     font-family: 'Roboto', sans-serif;
 }
 
 h2{
-    width: 1000px
     font-size: 300%;
     text-align: center;
     background-color: #96C8A2;
 }
 body{
-    width: 960px;
     font-family: 'Roboto', sans-serif;
     background-color: #e0f2f1
 }
@@ -18,6 +21,7 @@ body{
 }
 
 .entry_two{
+    width: 360px;
     position: relative;
     left: 600px;
     top: -75px;
@@ -26,7 +30,7 @@ body{
     text-transform: capitalize;
 }
 .data_group2{
-    width: 1000px
+    width: 380px;
     position: relative;
     left: 600px;
     top: -300px;
