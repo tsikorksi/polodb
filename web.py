@@ -87,6 +87,8 @@ def stats():
                 global enter2
                 enter2 = True
         elif 'query' in request.form:
+            flag = request.form['options']
+            query = request.form['query']
             pass
         return render_template('data_menu.html', template=template, template2=template2, enter=enter, enter2=enter2)
     else:
