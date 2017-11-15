@@ -63,9 +63,10 @@ def page_not_found(error):
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
     if request.method == "POST":
+        print(request.values)
         if 'search' in request.form:
             player_name = request.form['player_name']
-            mean, median, max_val, min_val, dev, error = forms.player_stats(player_name)
+            mean, median, max_val, min_val, dev, error = forms.single_variable_stats(player_name, 0)
             if error:
                 return render_template('page_not_found.html'), 404
             else:
@@ -75,9 +76,9 @@ def stats():
                 enter = True
                 return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
                                        enter=True)
-        else:
+        elif 'compare' in request.form:
             player_name2 = request.form['player_name2']
-            mean, median, max_val, min_val, dev, error = forms.player_stats(player_name2)
+            mean, median, max_val, min_val, dev, error = forms.single_variable_stats(player_name2, 0)
             if error:
                 return render_template('page_not_found.html'), 404
             else:
@@ -85,6 +86,8 @@ def stats():
                 template2 = [mean, median, max_val, min_val, dev, player_name2]
                 global enter2
                 enter2 = True
+        elif 'query' in request.form:
+            pass
         return render_template('data_menu.html', template=template, template2=template2, enter=enter, enter2=enter2)
     else:
         return render_template('data_menu.html', enter=False, enter2=False)

@@ -75,9 +75,8 @@ def maths(values, mean):
     return median, max_val, min_val, std_dev
 
 
-def player_stats(player):
+def single_variable_stats(variable, flag):
     """
-    needs work, doesnt work yet
     :param: str
     :return:
     """
@@ -87,7 +86,7 @@ def player_stats(player):
     input_array = data_decode()
     # mean calculation
     for i in range(0, len(input_array)):
-        if input_array[i][0] == player:
+        if input_array[i][flag] == variable:
             count += 1
             values.append(int(input_array[i][3]))
             sum_val += int(input_array[i][3])
@@ -102,3 +101,41 @@ def player_stats(player):
     # print(values)
     median, max_val, min_val, std_dev = maths(values, mean)
     return mean, median, max_val, min_val, std_dev, error
+
+
+def double_variable_stats(player, variable, flag):
+    """
+    :param player:
+    :param variable:
+    :param flag:
+    :return:
+    """
+    count, sum_val = 0, 0
+    error = False
+    values, scores = [], []
+    input_array = data_decode()
+    # print(input_array)
+    for i in range(0, len(input_array)):
+            if input_array[i][0] == player:
+                values.append(i)
+
+    for i in range(0, len(input_array)):
+        if i in values and input_array[i][flag] == variable:
+            count += 1
+            scores.append(int(input_array[i][3]))
+            sum_val += int(input_array[i][3])
+    print(scores)
+    try:
+        mean = sum_val/count
+    except ZeroDivisionError:
+        error = True
+        mean, median, max_val, min_val, std_dev = 0, 0, 0, 0, 0
+        return mean, median, max_val, min_val, std_dev, error
+    # sort
+    bubble_sort(scores)
+    # print(values)
+    median, max_val, min_val, std_dev = maths(scores, mean)
+    return mean, median, max_val, min_val, std_dev, error
+
+
+# double_variable_stats('eric', 'a', 0)

@@ -13,7 +13,7 @@
             <form action="{{ url_for('stats') }}" method="POST">
                 <p>Compare</p>
                 <input type="text" name="player_name2" placeholder="Player Name" pattern="[a-z]{0,}">
-                <input type="submit" value="Compare">
+                <input type="submit" value="Compare" name="compare">
             </form>
         </div>
         <div class = "data_group">
@@ -36,14 +36,14 @@
         <div class  = 'search_group'>
             <p>Search for player stats comparing:</p>
             <form action="{{ url_for('stats') }}" method="POST">
-                <select name="options" title ='search_query_type'>
+                <select name="options" title ='query'>
                     <option value="pony">Pony</option>
                     <option value="venue">Venue</option>
                     <option value="conditions">Conditions</option>
                 </select>
                 <br>
                 <br>
-                <input type="text" name="search_query" placeholder="Search">
+                <input type="text" name="query" placeholder="Search">
                 <br>
                 <input type="submit" value="Search">
             </form>
