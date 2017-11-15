@@ -74,7 +74,7 @@ def stats():
                 global enter
                 enter = True
                 return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
-                                       entered=True)
+                                       enter=True)
         else:
             player_name2 = request.form['player_name2']
             mean, median, max_val, min_val, dev, error = forms.player_stats(player_name2)
@@ -87,7 +87,7 @@ def stats():
                 enter2 = True
         return render_template('data_menu.html', template=template, template2=template2, enter=enter, enter2=enter2)
     else:
-        return render_template('data_menu.html', entered=False, entered2=False)
+        return render_template('data_menu.html', enter=False, enter2=False)
 
 
 @app.route("/compare", methods=["POST", "GET"])
