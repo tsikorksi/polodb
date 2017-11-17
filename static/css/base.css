@@ -1,12 +1,9 @@
 html, body {
-    /*max-width: 100%;*/
     overflow-x: hidden;
 }
-
 *{
     font-family: 'Roboto', sans-serif;
 }
-
 h2{
     font-size: 300%;
     text-align: center;
