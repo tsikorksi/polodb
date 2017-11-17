@@ -22,11 +22,14 @@ def split(input_str):
     """
     this function is haunted
     this function has been exorcised, carry on citizen
+
+    splits data from DB into strings for processing
     :return:
     """
     final_array = []
     mid_str = ''
     for i in range(0, len(input_str)):
+        # takes encrpted or unencrypted strings
         if input_str[i] == "." or input_str[i] == ')':
             final_array.append(mid_str)
             mid_str = ''
@@ -37,6 +40,7 @@ def split(input_str):
 
 def data_decode():
     """
+    reads and decrypts data from DB
     :return:
     """
     output_data = []
@@ -51,6 +55,7 @@ def data_decode():
 
 def maths(values, mean):
     """
+    calculates meadian, largest value , smallest value and standard deviation
     :param values:
     :param mean:
     :return:
@@ -77,6 +82,7 @@ def maths(values, mean):
 
 def single_variable_stats(variable, flag):
     """
+    gets stattistics for single variable that is used in data_menu.html
     :param: str
     :return:
     """
@@ -90,6 +96,7 @@ def single_variable_stats(variable, flag):
             count += 1
             values.append(int(input_array[i][3]))
             sum_val += int(input_array[i][3])
+    # checks if no values are returned
     try:
         mean = sum_val/count
     except ZeroDivisionError:
@@ -98,7 +105,7 @@ def single_variable_stats(variable, flag):
         return mean, median, max_val, min_val, std_dev, error
     # sort
     bubble_sort(values)
-    # print(values)
+    # runs maths calc
     median, max_val, min_val, std_dev = maths(values, mean)
     # print(mean, median, max_val, min_val, std_dev, error)
     return mean, median, max_val, min_val, std_dev, error
@@ -106,6 +113,7 @@ def single_variable_stats(variable, flag):
 
 def double_variable_stats(player, variable, flag):
     """
+    used in comparson in data_menu.html
     :param player:
     :param variable:
     :param flag:
@@ -116,16 +124,18 @@ def double_variable_stats(player, variable, flag):
     values, scores = [], []
     input_array = data_decode()
     # print(input_array)
+    # selects postions for scores where the player and variable are True
     for i in range(0, len(input_array)):
             if input_array[i][0] == player:
                 values.append(i)
-
+    # mean calculation
     for i in range(0, len(input_array)):
         if i in values and input_array[i][flag] == variable:
             count += 1
             scores.append(int(input_array[i][3]))
             sum_val += int(input_array[i][3])
     # print(scores)
+    # error handling
     try:
         mean = sum_val/count
     except ZeroDivisionError:
@@ -134,10 +144,7 @@ def double_variable_stats(player, variable, flag):
         return mean, median, max_val, min_val, std_dev, error
     # sort
     bubble_sort(scores)
-    # print(values)
+    # maths
     median, max_val, min_val, std_dev = maths(scores, mean)
     # print(mean, median, max_val, min_val, std_dev, error)
     return mean, median, max_val, min_val, std_dev, error
-
-
-single_variable_stats('eric', 0)

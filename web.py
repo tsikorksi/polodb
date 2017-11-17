@@ -11,8 +11,7 @@ enter = None
 enter2 = None
 enter3 = False
 app = Flask(__name__)
-app.secret_key = "development-key"
-# TODO: css, docs
+# app.secret_key = "development-key"
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -23,6 +22,9 @@ def hello():
     there is no db library because this has to be
     'computationally complex' cuz fuck not reinventing the wheel
     this will not scale lol
+
+    Takes data input to entry_menu.html and adds it to the DB
+    also logs vistors to site
     :return:
     """
     if request.method == "POST":
@@ -35,19 +37,21 @@ def hello():
         entry_data.append(encrypt.shift_encode(request.form["pony"], 5))
         entry_data.append(encrypt.shift_encode(request.form["result"], 5))
         entry_data.append(encrypt.shift_encode(request.form["conditions"], 5))
+        # adds . for seperation
         for i in range(0, len(entry_data)):
             for j in range(0, len(entry_data[i])):
                 temp.append(entry_data[i][j])
             temp.append('.')
         # temp.append('.')
         input_data = ''.join(temp)
-        # print(input_data)
+        # validation
         valid = validate(input_data)
         error = valid
         if valid:
             coredb.write(input_data + '\n')
         return render_template('entry_menu.html', error=error), 200
     elif request.method == "GET":
+        # logging
         with open("data"+"/visitors.txt", "a") as file:
             file.write('ip: ' + request.environ['REMOTE_ADDR'] + " " + str(jsonify({'ip': request.remote_addr})) + "\n")
         return render_template('entry_menu.html')
@@ -57,18 +61,26 @@ def hello():
 @app.errorhandler(404)
 def page_not_found(error):
     """
-    404
+    handles 404 errors, returning page_not_found.html
     :param error:
     :return:
     """
-    print(error)
+    # logs error
+    with open("data" + "/visitors.txt", "a") as file:
+        file.write('ip: ' + request.environ['REMOTE_ADDR'] + " " +
+                   str(jsonify({'ip': request.remote_addr})) + "\n" + error)
     return render_template('page_not_found.html'), 404
 
 
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
+    """
+    handles data_menu.html
+    takes form input on page and gets data from the DB
+    :return:
+    """
     if request.method == "POST":
-        # print(request.values)
+        # globals
         global template3
         template3 = None
         global player_name
@@ -76,7 +88,7 @@ def stats():
         global enter3
         enter3 = False
         if 'search' in request.form:
-            # global player_name
+            # if first part of check, where only one box is visible
             player_name = request.form['player_name']
             mean, median, max_val, min_val, dev, error = forms.single_variable_stats(player_name, 0)
             if error:
@@ -89,7 +101,7 @@ def stats():
                 return render_template('data_menu.html', template=template, template3=template3,
                                        enter=True, enter3=enter3)
         elif 'compare' in request.form:
-            # global player_name2
+            # if second name has been entered this handles the second search
             player_name2 = request.form['player_name2']
             mean, median, max_val, min_val, dev, error = forms.single_variable_stats(player_name2, 0)
             if error:
@@ -100,7 +112,9 @@ def stats():
                 global enter2
                 enter2 = True
         elif 'query' in request.form:
+            # if second variable comparison has been chosen, this processes handles the POST
             option = request.form['options']
+            # chooses flag
             if option == 'pony':
                 flag = 2
             elif option == 'venue':
@@ -110,6 +124,7 @@ def stats():
             else:
                 return render_template('page_not_found.html'), 404
             query = request.form['query']
+            # handles weather condtions
             if 'rain' in query:
                 query = '1'
             elif 'snow' in query:
@@ -118,6 +133,7 @@ def stats():
                 query = '3'
             elif 'clear' in query:
                 query = '0'
+            # calculates stats
             mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name, query, flag)
             if error:
                 return render_template('page_not_found.html'), 404
@@ -128,39 +144,37 @@ def stats():
             if enter2:
                 global template4
                 mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name2, query, flag)
-                # if query == '1':
-                #     weather = 'Raining'
-                # elif query == '2':
-                #     weather = 'Snowing'
-                # elif query == '3':
-                #     weather = 'Hot weather'
-                # elif query == '0':
-                #     weather = 'Clear'
-                #
                 if flag == 4:
                     query = request.form['query']
                 template4 = [mean, median, max_val, min_val, dev, query]
             enter3 = True
+        # final part 3 variables sent to HTML
         return render_template('data_menu.html', template=template, template2=template2, template3=template3,
                                template4=template4, enter=enter, enter2=enter2, enter3=enter3)
     else:
+        # if request was a GET, sends basic HTML to client
         return render_template('data_menu.html', enter=False, enter2=False)
 
 
 @app.route("/robots.txt")
 def robots():
+    """
+    handles robots.txt
+    :return:
+    """
     return render_template('robots.txt')
 
 
 def validate(data_set):
     """
-    data validation for input
+    data validation for input, checks if all fields are filled
     :param data_set:
     :return:
     """
     valid = True
     # checks for missing data
     for i in range(0, len(data_set)):
+        # returns False if 2 . next to each other, indicating a data point has not been entered
         if data_set[i] == "." and data_set[i-1] == ".":
             valid = False
     return valid

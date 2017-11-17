@@ -5,6 +5,7 @@ Encryption functions
 
 def shift_encode(message, shift):
     """
+    shift encryption
     :param message: str
     :param shift: int
     :return x: list
@@ -21,6 +22,7 @@ def shift_encode(message, shift):
 
 def shift_decode(message, shift):
     """
+    shift decryption
     :param message:
     :param shift:
     :return:
