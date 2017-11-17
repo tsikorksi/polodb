@@ -70,9 +70,11 @@ def stats():
     if request.method == "POST":
         # print(request.values)
         global template3
+        template3 = None
         global player_name
         global player_name2
         global enter3
+        enter3 = False
         if 'search' in request.form:
             # global player_name
             player_name = request.form['player_name']
@@ -84,7 +86,7 @@ def stats():
                 template = [mean, median, max_val, min_val, dev, player_name]
                 global enter
                 enter = True
-                return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
+                return render_template('data_menu.html', template=template, template3=template3,
                                        enter=True, enter3=enter3)
         elif 'compare' in request.form:
             # global player_name2

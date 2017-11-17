@@ -18,30 +18,31 @@ h3{
 body{
     background-color: #e0f2f1
 }
-.data_group{
-    position: relative;
-    top: -50px;
-
-}
 .entry_two{
     width: 360px;
     position: relative;
     left: 600px;
     top: -75px;
 }
+.data_group{
+    width: 380px;
+    position: relative;
+    top: -50px;
+
+}
 .data_group2{
     width: 380px;
     position: relative;
+    top: -405px;
     left: 600px;
-    top: -480px;
 }
 .display_1{
-    position: relative;
-    left: 600px;
-    top: -395px;
-
+    width: 380px;
+    position: static;
 }
 .display_2{
+    width: 380px;
     position: relative;
-    top: -305px;
+    left: 600px;
+    top: -320px;
 }
