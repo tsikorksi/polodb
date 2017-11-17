@@ -1,13 +1,18 @@
 from flask import Flask, render_template, request, jsonify
 import forms
 import encrypt
+player_name = None
+player_name2 = None
 template = None
 template2 = None
+template3 = None
+template4 = None
 enter = None
 enter2 = None
+enter3 = False
 app = Flask(__name__)
 app.secret_key = "development-key"
-# TODO:secondary data comparison, css, unit tests, docs
+# TODO: css, unit tests, docs
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -63,8 +68,13 @@ def page_not_found(error):
 @app.route("/stats", methods=["POST", "GET"])
 def stats():
     if request.method == "POST":
-        print(request.values)
+        # print(request.values)
+        global template3
+        global player_name
+        global player_name2
+        global enter3
         if 'search' in request.form:
+            # global player_name
             player_name = request.form['player_name']
             mean, median, max_val, min_val, dev, error = forms.single_variable_stats(player_name, 0)
             if error:
@@ -75,8 +85,9 @@ def stats():
                 global enter
                 enter = True
                 return render_template('data_menu.html', template=[mean, median, max_val, min_val, dev, player_name],
-                                       enter=True)
+                                       enter=True, enter3=enter3)
         elif 'compare' in request.form:
+            # global player_name2
             player_name2 = request.form['player_name2']
             mean, median, max_val, min_val, dev, error = forms.single_variable_stats(player_name2, 0)
             if error:
@@ -87,10 +98,36 @@ def stats():
                 global enter2
                 enter2 = True
         elif 'query' in request.form:
-            flag = request.form['options']
+            option = request.form['options']
+            if option == 'pony':
+                flag = 2
+            elif option == 'venue':
+                flag = 1
+            elif option == 'conditions':
+                flag = 4
+            else:
+                return render_template('page_not_found.html'), 404
             query = request.form['query']
-            pass
-        return render_template('data_menu.html', template=template, template2=template2, enter=enter, enter2=enter2)
+            if 'rain' in query:
+                query = '1'
+            elif 'snow' in query:
+                query = '2'
+            elif 'hot' in query:
+                query = '3'
+            elif 'clear' in query:
+                query = '0'
+            mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name, query, flag)
+            if error:
+                return render_template('page_not_found.html'), 404
+            else:
+                template3 = [mean, median, max_val, min_val, dev, query]
+            if enter2:
+                global template4
+                mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name2, query, flag)
+                template4 = [mean, median, max_val, min_val, dev, query]
+            enter3 = True
+        return render_template('data_menu.html', template=template, template2=template2, template3=template3,
+                               template4=template4, enter=enter, enter2=enter2, enter3=enter3)
     else:
         return render_template('data_menu.html', enter=False, enter2=False)
 

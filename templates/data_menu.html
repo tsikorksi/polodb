@@ -5,7 +5,6 @@
         <form action="{{ url_for('stats') }}" method="POST">
             <input type="text" name="player_name" placeholder="Player Name" pattern="[a-z]{0,}">
             <input type="submit" value="Search" name="search">
-            <br>
         </form>
     </div>
     {% if enter == True %}
@@ -33,21 +32,43 @@
                 <br>
             </p>
         </div>
-        <div class  = 'search_group'>
-            <p>Search for player stats comparing:</p>
-            <form action="{{ url_for('stats') }}" method="POST">
-                <select name="options" title ='query'>
-                    <option value="pony">Pony</option>
-                    <option value="venue">Venue</option>
-                    <option value="conditions">Conditions</option>
-                </select>
-                <br>
-                <br>
-                <input type="text" name="query" placeholder="Search">
-                <br>
-                <input type="submit" value="Search">
-            </form>
-        </div>
+        {% if enter3 == False %}
+            <div class  = 'search_group'>
+                <p>Search for player stats comparing:</p>
+                <form action="{{ url_for('stats') }}" method="POST">
+                    <select name="options" title ='query'>
+                        <option value="pony">Pony</option>
+                        <option value="venue">Venue</option>
+                        <option value="conditions">Conditions</option>
+                    </select>
+                    <br>
+                    <br>
+                    <input type="text" name="query" placeholder="Search">
+                    <br>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        {% endif %}
+        {% if enter3 == True %}
+            <p>Stats for players at/with:</p>
+            <div class="display_1">
+                <h3 id="top">
+                    {{ template3[5] }}
+                </h3>
+                <p>
+                    Mean score =  {{ template3[0] }}
+                    <br>
+                    Median score = {{ template3[1] }}
+                    <br>
+                    Highest score =  {{ template3[2] }}
+                    <br>
+                    Lowest score =  {{ template3[3] }}
+                    <br>
+                    Standard deviation of score =  {{ template3[4] }}
+                    <br>
+                </p>
+            </div>
+        {% endif %}
     {% endif %}
     {% if enter2 == True %}
         <div class = "data_group2">
@@ -67,5 +88,24 @@
                 <br>
             </p>
         </div>
+        {% if enter3 == True %}
+            <div class="display_2">
+                <h3 id="top">
+                    {{ template4[5] }}
+                </h3>
+                <p>
+                    Mean score =  {{ template4[0] }}
+                    <br>
+                    Median score = {{ template4[1] }}
+                    <br>
+                    Highest score =  {{ template4[2] }}
+                    <br>
+                    Lowest score =  {{ template4[3] }}
+                    <br>
+                    Standard deviation of score =  {{ template4[4] }}
+                    <br>
+                </p>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}

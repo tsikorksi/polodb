@@ -124,7 +124,7 @@ def double_variable_stats(player, variable, flag):
             count += 1
             scores.append(int(input_array[i][3]))
             sum_val += int(input_array[i][3])
-    print(scores)
+    # print(scores)
     try:
         mean = sum_val/count
     except ZeroDivisionError:
