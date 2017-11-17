@@ -12,7 +12,7 @@ enter2 = None
 enter3 = False
 app = Flask(__name__)
 app.secret_key = "development-key"
-# TODO: css, unit tests, docs
+# TODO: css, docs
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -132,11 +132,6 @@ def stats():
                                template4=template4, enter=enter, enter2=enter2, enter3=enter3)
     else:
         return render_template('data_menu.html', enter=False, enter2=False)
-
-
-@app.route("/compare", methods=["POST", "GET"])
-def compare():
-    pass
 
 
 @app.route("/robots.txt")

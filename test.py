@@ -1,0 +1,59 @@
+import unittest2
+import encrypt
+import forms
+import web
+
+
+class FormsTest(unittest2.TestCase):
+    def test_bubble_sort(self):
+        self.assertEqual(forms.bubble_sort(['8', '7', '1']), ['1', '7', '8'])
+        self.assertRaises(TypeError, forms.bubble_sort(['8', '7', 'a']))
+        self.assertEqual(forms.bubble_sort(['0', '99999', '1']), ['0', '1', '99999'])
+
+    def test_split(self):
+        self.assertEqual(forms.split('a.bb.ccc.dddd.'), ['a', 'bb', 'ccc', 'dddd'])
+        self.assertRaises(TypeError, forms.split)
+        self.assertEqual(forms.split('ooooo'), [])
+
+    def test_maths(self):
+        self.assertEqual(forms.maths([4, 6, 2, 4, 0, 8], 4), (3.0, 8, 4, 2.5819888974716116))
+        errors = IndexError, ZeroDivisionError
+        with self.assertRaises(errors):
+            forms.maths([], 0)
+
+    def test_double_var(self):
+        self.assertEqual(forms.double_variable_stats('dora', 'eric', 0), (0, 0, 0, 0, 0, True))
+        self.assertAlmostEqual(forms.double_variable_stats('eric', 'dora', 2),
+                               (3.3333333333333335, 4, 4, 2, 0.9428090415820626, False), 3)
+
+    def test_single_var(self):
+        self.assertAlmostEqual(forms.single_variable_stats('eric', 0),
+                               (4.96969696969697, 5, 8, 1, 2.0814454255847754, False), 3)
+        self.assertEqual(forms.single_variable_stats('dora', 0), (0, 0, 0, 0, 0, True))
+
+
+class EncryptTest(unittest2.TestCase):
+    def test_shift_encode(self):
+        self.assertEqual(encrypt.shift_encode('testcasedefault', 5),
+                         ['y', 'j', 'x', 'y', 'h', 'f', 'x', 'j', 'i', 'j', 'k', 'f', 'z', 'q', 'y'])
+        self.assertEqual(encrypt.shift_encode('!@#$%^&*(){}_+<>', 1209),
+                         ['.', 'M', '0', '1', '2', 'k', '3', '7', '5', '6', '\x88', '\x8a', 'l', '8', 'I', 'K'])
+        self.assertRaises(TypeError, encrypt.shift_encode)
+
+    def test_shift_decode(self):
+        self.assertEqual(encrypt.shift_decode('yjxyhfxjijkfzqy', 5),
+                         ['t', 'e', 's', 't', 'c', 'a', 's', 'e', 'd', 'e', 'f', 'a', 'u', 'l', 't'])
+        self.assertEqual(encrypt.shift_decode('.M012k3756\x88\x8al8IK', 1209),
+                         ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '{', '}', '_', '+', '<', '>'])
+        self.assertRaises(TypeError, encrypt.shift_decode)
+
+
+class WebTest(unittest2.TestCase):
+    def test_validate(self):
+        self.assertEqual(web.validate('aa.aada.dqrrq.adadar.gsgwgwfafagg.adadagag.'), True)
+        self.assertEqual(web.validate('..afgshsgagagag'), False)
+        self.assertEqual(web.validate('daghsbwrshs.h.n.\n\x88.'), True)
+
+
+if __name__ == '__main__':
+    unittest2.main()

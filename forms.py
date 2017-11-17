@@ -100,6 +100,7 @@ def single_variable_stats(variable, flag):
     bubble_sort(values)
     # print(values)
     median, max_val, min_val, std_dev = maths(values, mean)
+    # print(mean, median, max_val, min_val, std_dev, error)
     return mean, median, max_val, min_val, std_dev, error
 
 
@@ -135,7 +136,8 @@ def double_variable_stats(player, variable, flag):
     bubble_sort(scores)
     # print(values)
     median, max_val, min_val, std_dev = maths(scores, mean)
+    # print(mean, median, max_val, min_val, std_dev, error)
     return mean, median, max_val, min_val, std_dev, error
 
 
-# double_variable_stats('eric', 'a', 0)
+single_variable_stats('eric', 0)

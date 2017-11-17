@@ -7,7 +7,6 @@ import encrypt
 
 def random_write():
     """
-    this function is haunted
     :return:
     """
     count = int(input("Data points?"))
