@@ -29,7 +29,7 @@ def split(input_str):
     final_array = []
     mid_str = ''
     for i in range(0, len(input_str)):
-        # takes encrpted or unencrypted strings
+        # takes encrypted or unencrypted strings
         if input_str[i] == "." or input_str[i] == ')':
             final_array.append(mid_str)
             mid_str = ''
@@ -55,7 +55,7 @@ def data_decode():
 
 def maths(values, mean):
     """
-    calculates meadian, largest value , smallest value and standard deviation
+    calculates median, largest value , smallest value and standard deviation
     :param values:
     :param mean:
     :return:
@@ -82,7 +82,7 @@ def maths(values, mean):
 
 def single_variable_stats(variable, flag):
     """
-    gets stattistics for single variable that is used in data_menu.html
+    gets statistics for single variable that is used in data_menu.html
     :param: str
     :return:
     """
@@ -113,7 +113,7 @@ def single_variable_stats(variable, flag):
 
 def double_variable_stats(player, variable, flag):
     """
-    used in comparson in data_menu.html
+    used in comparison in data_menu.html
     :param player:
     :param variable:
     :param flag:
@@ -124,7 +124,7 @@ def double_variable_stats(player, variable, flag):
     values, scores = [], []
     input_array = data_decode()
     # print(input_array)
-    # selects postions for scores where the player and variable are True
+    # selects positions for scores where the player and variable are True
     for i in range(0, len(input_array)):
             if input_array[i][0] == player:
                 values.append(i)

@@ -18,7 +18,7 @@ app = Flask(__name__)
 def hello():
     """
     Takes data input to entry_menu.html and adds it to the DB
-    also logs vistors to site
+    also logs visitors to site
     :return:
     """
     if request.method == "POST":
@@ -31,7 +31,7 @@ def hello():
         entry_data.append(encrypt.shift_encode(request.form["pony"], 5))
         entry_data.append(encrypt.shift_encode(request.form["result"], 5))
         entry_data.append(encrypt.shift_encode(request.form["conditions"], 5))
-        # adds . for seperation
+        # adds . for separation
         for i in range(0, len(entry_data)):
             for j in range(0, len(entry_data[i])):
                 temp.append(entry_data[i][j])
@@ -118,7 +118,7 @@ def stats():
             else:
                 return render_template('page_not_found.html'), 404
             query = request.form['query']
-            # handles weather condtions
+            # handles weather conditions
             if 'rain' in query:
                 query = '1'
             elif 'snow' in query:
