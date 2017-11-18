@@ -15,3 +15,31 @@ h3{
 body{
     background-color: #e0f2f1
 }
+.entry_two{
+    width: 360px;
+    position: relative;
+    left: 600px;
+    top: -75px;
+}
+.data_group{
+    width: 380px;
+    position: relative;
+    top: -50px;
+
+}
+.data_group2{
+    width: 380px;
+    position: relative;
+    top: -350px;
+    left: 600px;
+}
+.display_1{
+    width: 380px;
+    position: static;
+}
+.display_2{
+    width: 380px;
+    position: relative;
+    left: 600px;
+    top: -320px;
+}
