@@ -132,14 +132,12 @@ def stats():
             if error:
                 return render_template('page_not_found.html'), 404
             else:
-                if flag == 4:
-                    query = request.form['query']
                 template3 = [mean, median, max_val, min_val, dev, query]
             if enter2:
                 global template4
                 mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name2, query, flag)
-                if flag == 4:
-                    query = request.form['query']
+            if flag == 4:
+                query = request.form['query']
                 template4 = [mean, median, max_val, min_val, dev, query]
             enter3 = True
         # final part 3 variables sent to HTML
