@@ -17,12 +17,6 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def hello():
     """
-    Basic web service for data entry
-    all data is added to coredb.txt
-    there is no db library because this has to be
-    'computationally complex' cuz fuck not reinventing the wheel
-    this will not scale lol
-
     Takes data input to entry_menu.html and adds it to the DB
     also logs vistors to site
     :return:
