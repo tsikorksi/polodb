@@ -86,71 +86,75 @@ class InternalMethods:
         return median, max_val, min_val, std_dev
 
 
-def single_variable_stats(variable, flag):
-    """
-    gets statistics for single variable that is used in data_menu.html
-    :param: str
-    :return:
-    """
-    error = False
-    values = []
-    sum_val, count = 0, 0
-    input_array = InternalMethods.data_decode()
-    # mean calculation
-    for i in range(0, len(input_array)):
-        if input_array[i][flag] == variable:
-            count += 1
-            values.append(int(input_array[i][3]))
-            sum_val += int(input_array[i][3])
-    # checks if no values are returned
-    try:
-        mean = sum_val/count
-    except ZeroDivisionError:
-        error = True
-        mean, median, max_val, min_val, std_dev = 0, 0, 0, 0, 0
-        return mean, median, max_val, min_val, std_dev, error
-    # sort
-    InternalMethods.bubble_sort(values)
-    # runs maths calc
-    median, max_val, min_val, std_dev = InternalMethods.maths(values, mean)
-    # print(mean, median, max_val, min_val, std_dev, error)
-    return mean, median, max_val, min_val, std_dev, error
+class Stats:
 
+    def __init__(self):
+        self
 
-def double_variable_stats(player, variable, flag):
-    """
-    used in comparison in data_menu.html
-    :param player:
-    :param variable:
-    :param flag:
-    :return:
-    """
-    count, sum_val = 0, 0
-    error = False
-    values, scores = [], []
-    input_array = InternalMethods.data_decode()
-    # print(input_array)
-    # selects positions for scores where the player and variable are True
-    for i in range(0, len(input_array)):
-            if input_array[i][0] == player:
-                values.append(i)
-    # mean calculation
-    for i in range(0, len(input_array)):
-        if i in values and input_array[i][flag] == variable:
-            count += 1
-            scores.append(int(input_array[i][3]))
-            sum_val += int(input_array[i][3])
-    # print(scores)
-    # error handling
-    try:
-        mean = sum_val/count
-    except ZeroDivisionError:
-        error = True
-        mean, median, max_val, min_val, std_dev = 0, 0, 0, 0, 0
+    def single_variable_stats(self, flag):
+        """
+        gets statistics for single variable that is used in data_menu.html
+        :param: str
+        :return:
+        """
+        error = False
+        values = []
+        sum_val, count = 0, 0
+        input_array = InternalMethods.data_decode()
+        # mean calculation
+        for i in range(0, len(input_array)):
+            if input_array[i][flag] == self:
+                count += 1
+                values.append(int(input_array[i][3]))
+                sum_val += int(input_array[i][3])
+        # checks if no values are returned
+        try:
+            mean = sum_val/count
+        except ZeroDivisionError:
+            error = True
+            mean, median, max_val, min_val, std_dev = 0, 0, 0, 0, 0
+            return mean, median, max_val, min_val, std_dev, error
+        # sort
+        InternalMethods.bubble_sort(values)
+        # runs maths calc
+        median, max_val, min_val, std_dev = InternalMethods.maths(values, mean)
+        # print(mean, median, max_val, min_val, std_dev, error)
         return mean, median, max_val, min_val, std_dev, error
-    # sort
-    InternalMethods.bubble_sort(scores)
-    # maths
-    median, max_val, min_val, std_dev = InternalMethods.maths(scores, mean)
-    # print(mean, median, max_val, min_val, std_dev, error)
-    return mean, median, max_val, min_val, std_dev, error
+
+    def double_variable_stats(self, variable, flag):
+        """
+        used in comparison in data_menu.html
+        :param player:
+        :param variable:
+        :param flag:
+        :return:
+        """
+        count, sum_val = 0, 0
+        error = False
+        values, scores = [], []
+        input_array = InternalMethods.data_decode()
+        # print(input_array)
+        # selects positions for scores where the player and variable are True
+        for i in range(0, len(input_array)):
+                if input_array[i][0] == self:
+                    values.append(i)
+        # mean calculation
+        for i in range(0, len(input_array)):
+            if i in values and input_array[i][flag] == variable:
+                count += 1
+                scores.append(int(input_array[i][3]))
+                sum_val += int(input_array[i][3])
+        # print(scores)
+        # error handling
+        try:
+            mean = sum_val/count
+        except ZeroDivisionError:
+            error = True
+            mean, median, max_val, min_val, std_dev = 0, 0, 0, 0, 0
+            return mean, median, max_val, min_val, std_dev, error
+        # sort
+        InternalMethods.bubble_sort(scores)
+        # maths
+        median, max_val, min_val, std_dev = InternalMethods.maths(scores, mean)
+        # print(mean, median, max_val, min_val, std_dev, error)
+        return mean, median, max_val, min_val, std_dev, error
