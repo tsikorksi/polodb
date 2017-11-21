@@ -39,7 +39,7 @@ def hello():
         # temp.append('.')
         input_data = ''.join(temp)
         # validation
-        valid = validate(input_data)
+        valid = Validation.validate(input_data)
         error = valid
         if valid:
             coredb.write(input_data + '\n')
@@ -147,7 +147,7 @@ def stats():
                 mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name2, query, flag)
             if flag == 4:
                 query = request.form['query']
-                template4 = [mean, median, max_val, min_val, dev, query]
+            template4 = [mean, median, max_val, min_val, dev, query]
             enter3 = True
         # final part 3 variables sent to HTML
         return render_template('data_menu.html', template=template, template2=template2, template3=template3,
@@ -166,19 +166,22 @@ def robots():
     return render_template('robots.txt')
 
 
-def validate(data_set):
-    """
-    data validation for input, checks if all fields are filled
-    :param data_set:
-    :return:
-    """
-    valid = True
-    # checks for missing data
-    for i in range(0, len(data_set)):
-        # returns False if 2 . next to each other, indicating a data point has not been entered
-        if data_set[i] == "." and data_set[i-1] == ".":
-            valid = False
-    return valid
+class Validation:
+
+    @staticmethod
+    def validate(data_set):
+        """
+        data validation for input, checks if all fields are filled
+        :param data_set:
+        :return:
+        """
+        valid = True
+        # checks for missing data
+        for i in range(0, len(data_set)):
+            # returns False if 2 . next to each other, indicating a data point has not been entered
+            if data_set[i] == "." and data_set[i-1] == ".":
+                valid = False
+        return valid
 
 
 if __name__ == "__main__":
