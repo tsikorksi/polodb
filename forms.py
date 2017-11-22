@@ -87,9 +87,9 @@ class InternalMethods:
 
 
 class Stats:
-
-    def __init__(self):
-        self
+    """
+    Creates instance of Stats and compares it
+    """
 
     def single_variable_stats(self, flag):
         """

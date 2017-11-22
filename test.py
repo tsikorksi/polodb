@@ -2,6 +2,8 @@ import unittest2
 import encrypt
 from forms import InternalMethods, Stats
 from web import Validation
+
+s = Stats
 i = InternalMethods
 v = Validation
 
@@ -24,14 +26,14 @@ class FormsTest(unittest2.TestCase):
             i.maths([], 0)
 
     def test_double_var(self):
-        self.assertEqual(Stats.double_variable_stats('dora', 'eric', 0), (0, 0, 0, 0, 0, True))
-        self.assertAlmostEqual(Stats.double_variable_stats('eric', 'dora', 2),
+        self.assertEqual(s.double_variable_stats('dora', 'eric', 0), (0, 0, 0, 0, 0, True))
+        self.assertAlmostEqual(s.double_variable_stats('eric', 'dora', 2),
                                (3.3333333333333335, 4, 4, 2, 0.9428090415820626, False), 3)
 
     def test_single_var(self):
-        self.assertAlmostEqual(Stats.single_variable_stats('eric', 0),
+        self.assertAlmostEqual(s.single_variable_stats('eric', 0),
                                (4.96969696969697, 5, 8, 1, 2.0814454255847754, False), 3)
-        self.assertEqual(Stats.single_variable_stats('dora', 0), (0, 0, 0, 0, 0, True))
+        self.assertEqual(s.single_variable_stats('dora', 0), (0, 0, 0, 0, 0, True))
 
 
 class EncryptTest(unittest2.TestCase):
