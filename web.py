@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import forms
 from forms import Stats
 import encrypt
 player_name = None
@@ -97,7 +98,8 @@ def stats():
         elif 'compare' in request.form:
             # if second name has been entered this handles the second search
             player_name2 = request.form['player_name2']
-            mean, median, max_val, min_val, dev, error = Stats.single_variable_stats(player_name2, 0)
+            stats = Stats(player_name, 0)
+            mean, median, max_val, min_val, dev, error = Stats.single_variable_stats(player_name, 0)
             if error:
                 return render_template('page_not_found.html'), 404
             else:
@@ -128,7 +130,7 @@ def stats():
             elif 'clear' in query:
                 query = '0'
             # calculates stats
-            mean, median, max_val, min_val, dev, error = Stats.double_variable_stats(player_name, query, flag)
+            mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name, query, flag)
             if error:
                 return render_template('page_not_found.html'), 404
             else:
@@ -144,7 +146,7 @@ def stats():
                     query = '3'
                 elif 'clear' in query:
                     query = '0'
-                mean, median, max_val, min_val, dev, error = Stats.double_variable_stats(player_name2, query, flag)
+                mean, median, max_val, min_val, dev, error = forms.double_variable_stats(player_name2, query, flag)
             if flag == 4:
                 query = request.form['query']
             template4 = [mean, median, max_val, min_val, dev, query]
