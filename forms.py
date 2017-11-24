@@ -3,6 +3,7 @@ This file will take and compare the data in coredb.txt
 """
 import encrypt
 import math
+from enum import Enum
 
 
 class InternalMethods:
@@ -103,10 +104,16 @@ class InternalMethods:
         return median, max_val, min_val, std_dev
 
 
-class Stats:
+class Stats(Enum):
     """
     Creates instance of Stats and compares it
     """
+    # created enum
+    pony = 2
+    name = 0
+    venue = 1
+    conditions = 4
+
     def __init__(self, player_name, option):
         self.name = player_name
         self.flag = 0
