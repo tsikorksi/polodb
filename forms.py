@@ -114,9 +114,9 @@ class Stats(Enum):
     venue = 1
     conditions = 4
 
-    def __init__(self, player_name, option):
-        self.name = player_name
+    def __init__(self, option):
         self.flag = 0
+        option = 0
         if option == 'pony':
             self.flag = 2
         elif option == 'venue':
