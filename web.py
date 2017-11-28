@@ -98,8 +98,8 @@ def stats():
         elif 'compare' in request.form:
             # if second name has been entered this handles the second search
             player_name2 = request.form['player_name2']
-            stats = Stats(player_name, 0)
-            mean, median, max_val, min_val, dev, error = Stats.single_variable_stats(player_name, 0)
+            # stats = Stats('pony')
+            mean, median, max_val, min_val, dev, error = Stats.single_variable_stats(player_name2, 0)
             if error:
                 return render_template('page_not_found.html'), 404
             else:
