@@ -1,8 +1,6 @@
 # Polodb
-Polo database and comparison script, written with flask. Complete
+Polo database and comparison script, written with flask. Completed
 
-
-![Build Status](https://travis-ci.org/travis-ci/travis-web)
 
 Requirements: python3, flask 0.12.2, unittest2
     
