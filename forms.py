@@ -119,7 +119,7 @@ class Stats(Enum):
     venue = 1
     conditions = 4
 
-    def __init__(self, option):
+    def __init__(self):
         self.flag = 0
         option = 0
         if option == 'pony':
