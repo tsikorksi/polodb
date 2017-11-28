@@ -26,6 +26,11 @@ class InternalMethods:
 
     @staticmethod
     def quicksort(arr):
+        """
+        quicksort algorithm
+        :param arr:
+        :return:
+        """
         if len(arr) == 1 or len(arr) == 0:
             return arr
         else:

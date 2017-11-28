@@ -4,7 +4,6 @@ import forms
 from forms import InternalMethods, Stats
 from web import Validation
 
-s = Stats('x', 0)
 i = InternalMethods
 v = Validation
 

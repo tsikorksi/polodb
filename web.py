@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, jsonify
+
+import encrypt
 import forms
 from forms import Stats
-import encrypt
+
 player_name = None
 player_name2 = None
 template = None
@@ -61,9 +63,11 @@ def page_not_found(error):
     :return:
     """
     # logs error
-    with open("data" + "/visitors.txt", "a") as file:
-        file.write('ip: ' + request.environ['REMOTE_ADDR'] + " " +
-                   str(jsonify({'ip': request.remote_addr})) + "\n" + error)
+    try:
+        with open("data" + "/visitors.txt", "a") as file:
+            file.write('ip: ' + request.environ['REMOTE_ADDR'] + "\n" + error)
+    except TypeError:
+        pass
     return render_template('page_not_found.html'), 404
 
 
