@@ -2,7 +2,7 @@
 Polo database and comparison script, written with flask. Completed
 
 
-Requirements: python3, flask 0.12.2, unittest2
+Requirements: python3, flask 0.12.2, unittest2 (for testing)
     
     
     

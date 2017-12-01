@@ -113,21 +113,20 @@ class Stats(Enum):
     """
     Creates instance of Stats and compares it
     """
-    # created enum
-    pony = 2
-    name = 0
-    venue = 1
-    conditions = 4
 
     def __init__(self):
-        self.flag = 0
+        flag = 0
         option = 0
         if option == 'pony':
-            self.flag = 2
+            flag = 2
         elif option == 'venue':
-            self.flag = 1
+            flag = 1
         elif option == 'conditions':
-            self.flag = 4
+            flag = 4
+        pony = 2
+        name = 0
+        venue = 1
+        conditions = 4
 
     def single_variable_stats(self, flag):
         """

@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block body %}
-    {% if enter3 %}
+    {% if enter3 == True %}
         <link rel="stylesheet" type="text/css" href="/static/css/variant.css">
     {% endif %}
     <p>Search player database</p>
@@ -97,7 +97,7 @@
                     {{ template4[5] }}
                 </h3>
                 <p>
-                    Mean score =  {{ template4[0] }}
+                    Mean score =  {{ template4[0] }}f
                     <br>
                     Median score = {{ template4[1] }}
                     <br>
@@ -110,5 +110,8 @@
                 </p>
             </div>
         {% endif %}
+        <div class="link">
+        <a href="/stats">Clear search</a>
+        </div>
     {% endif %}
 {% endblock %}
